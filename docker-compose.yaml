@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  admin:
+    build:
+      context: ./admin
+    ports:
+      - "6000:6000"
+
+  backend_cart:
+    build:
+      context: ./backend_cart
+    ports:
+      - "5002:5002"
+
+  backend_user:
+    build:
+      context: ./backend_user
+    ports:
+      - "5004:5004"
+
+  backend_product:
+    build:
+      context: ./backend_product
+    ports:
+      - "5001:5001"
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend_cart
+      - backend_user
+      - backend_product
