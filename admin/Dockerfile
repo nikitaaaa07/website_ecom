@@ -1,8 +1,8 @@
 # Use an official Node runtime as a parent image
-FROM node:14
+FROM node:16-alpine
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /src/app
 
 # Copy package.json and package-lock.json (or npm-shrinkwrap.json) to Docker environment
 COPY package*.json ./
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 RUN npm run build
 # Make port 3000 available to the world outside this container
-EXPOSE 6000
+EXPOSE 5004
 
 # Run the app using npm start
 CMD ["npm", "start"]

@@ -120,3 +120,12 @@ app.get('/allproducts',async (req,res)=>{
     console.log("All products fetched");
     res.send(products);
 })
+
+app.listen(port,(error)=>{
+    if(!error){
+        console.log("Server Running on Port "+port)
+    }
+    else{
+        console.log("Error: "+error)
+    }
+})
