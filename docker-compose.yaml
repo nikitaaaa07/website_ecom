@@ -4,7 +4,7 @@ services:
     build:
       context: ./admin
     ports:
-      - "6000:6000"
+      - "5004:5004"
 
   backend_cart:
     build:
@@ -16,7 +16,7 @@ services:
     build:
       context: ./backend_user
     ports:
-      - "5004:5004"
+      - "5000:5000"
 
   backend_product:
     build:
@@ -28,7 +28,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "3001:3001"
+      - "3000:3000"
     depends_on:
       - backend_cart
       - backend_user

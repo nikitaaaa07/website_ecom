@@ -1,4 +1,4 @@
-const port = 4000;
+const port = 5001;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { type } = require("os");
+const {type} = require("os");
 
 app.use(express.json());
 app.use(cors()); //connect to express using 4000 port
@@ -36,7 +36,7 @@ app.use('/images',express.static('upload/images'))
 app.post("/upload",upload.single('product'),(req,res)=>{
     res.json({
         success:1,
-        image_url:`http://localhost:${port}/images/${req.file.filename}`
+        image_url:`http://localhost:5001/images/${req.file.filename}`
     })
 })
 
@@ -119,6 +119,21 @@ app.get('/allproducts',async (req,res)=>{
     let products = await Product.find({});
     console.log("All products fetched");
     res.send(products);
+})
+
+app.get('/newcollections',async (req,res)=>{
+    let products =await Product.find({});
+    let newcollection=products.slice(1).slice(-8);
+    console.log("NewCollection Fetched");
+    res.send(newcollection);
+})
+
+//creating endpoint for popular in women section
+app.get('/popularinwomen',async (req,res)=>{
+    let products=await Product.find({category:"women"});
+    let popular_in_women =products.slice(0,4);
+    console.log("Popular in women fetched");
+    res.send(popular_in_women);
 })
 
 app.listen(port,(error)=>{
